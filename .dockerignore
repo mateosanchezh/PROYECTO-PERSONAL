@@ -9,3 +9,6 @@ mvnw.cmd
 .vscode
 nbproject
 dist
+.DS_Store
+*.iml
+*.log
