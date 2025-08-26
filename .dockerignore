@@ -1,0 +1,14 @@
+.git
+.gitignore
+target
+build
+.mvn
+mvnw
+mvnw.cmd
+.idea
+.vscode
+nbproject
+dist
+.DS_Store
+*.iml
+*.log
