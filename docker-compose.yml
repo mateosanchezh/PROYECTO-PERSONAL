@@ -25,8 +25,6 @@ services:
       db:
         condition: service_healthy
     environment:
-
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-appdb}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-app}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-app}
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
