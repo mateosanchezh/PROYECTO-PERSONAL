@@ -1,5 +1,6 @@
 package com.Personal.Proyecto.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,11 +39,13 @@ public class Book {
     @Column
     private int anoPublicacion;
 
+    @Builder.Default
     @Column(length = 20,nullable = false)
-    public String estado;
+    public String estado = "Disponible";
+
 
     @CreationTimestamp
-    public LocalDateTime fechaPublicacion;
+    public LocalDateTime fechaRegistro;
 
 
 }

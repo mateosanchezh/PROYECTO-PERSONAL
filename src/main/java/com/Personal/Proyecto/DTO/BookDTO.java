@@ -25,7 +25,6 @@ public class BookDTO {
     private int numeroCopias;
 
     @Min(value = 1500, message = "El año debe ser mayor o igual a 1500")
-    @Max(value = 2024, message = "El año no puede ser mayor al año actual")
     private Integer anoPublicacion;
 
 }
