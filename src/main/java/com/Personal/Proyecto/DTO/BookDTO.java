@@ -24,6 +24,7 @@ public class BookDTO {
     @Min(value = 1, message = "Debe haber al menos 1 copia disponible")
     private int numeroCopias;
 
+    @NotNull(message = "El año de publicacion es requerido")
     @Min(value = 1500, message = "El año debe ser mayor o igual a 1500")
     private Integer anoPublicacion;
 
