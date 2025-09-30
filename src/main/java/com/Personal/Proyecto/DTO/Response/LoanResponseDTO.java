@@ -1,7 +1,13 @@
 package com.Personal.Proyecto.DTO.Response;
 
-import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Data;
 
+import java.time.LocalDate;
+
+
+@Data
+@Builder
 public class LoanResponseDTO {
     private long loanId;
     private long userId;
@@ -11,8 +17,9 @@ public class LoanResponseDTO {
     private String bookAutor;
     private String bookCategoria;
     private String isbn;
-    private LocalDateTime fechaInicio;
-    private LocalDateTime fechaFinal;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
+    private LocalDate fechaDevolucion;
     private String estado;
-    private String mesnsaje;
+    private String mensaje;
 }
