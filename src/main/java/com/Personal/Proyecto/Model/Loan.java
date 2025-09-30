@@ -44,7 +44,7 @@ public class Loan {
     @CreationTimestamp
     private LocalDateTime fechaCreacion;
 
-    @Column(nullable = false)
+    @Column
     private LocalDate fechaDevolucionReal; //fecha real de cuando se devuelve
 
 }

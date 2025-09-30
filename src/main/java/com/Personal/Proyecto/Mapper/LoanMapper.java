@@ -9,6 +9,7 @@ import com.Personal.Proyecto.Model.User;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 public class LoanMapper {
@@ -16,12 +17,14 @@ public class LoanMapper {
     public Loan toEntity(LoanRequestDTO dto, User user, Book book, int loanDays) {
         LocalDate fechaInicio = LocalDate.now();
         LocalDate fechaDevolucion = fechaInicio.plusDays(loanDays);
+        LocalDateTime fechaCreacion = LocalDateTime.now();
 
         return Loan.builder()
                 .user(user)
                 .book(book)
                 .fechaPrestamo(fechaInicio)
                 .fechaDevolucion(fechaDevolucion)
+                .fechaCreacion(fechaCreacion)
                 .build();
     }
 
@@ -32,6 +35,7 @@ public class LoanMapper {
                 .username(loan.getUser().getNombreCompleto())
                 .bookid(loan.getBook().getId())
                 .bookTitulo(loan.getBook().getTitulo())
+                .bookCategoria(loan.getBook().getCategoria())
                 .bookAutor(loan.getBook().getAutor())
                 .isbn(loan.getBook().getIsbn())
                 .fechaInicio(loan.getFechaPrestamo())
