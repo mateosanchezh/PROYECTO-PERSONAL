@@ -96,15 +96,18 @@ public class LoanService {
 
     //Metodo auxiliar para actualizar prestamos vencidos
     @Transactional
-    public int actualizarPrestamosVencidos (){
-        List <Loan> prestamosVencidos = loanRepository.findByEstadoAndFechaDevolucionBefore("Activo", LocalDate.now());
-        for (Loan loan : prestamosVencidos){
+    public int actualizarPrestamosVencidos() {
+        List<Loan> overdueLoans = loanRepository.findByEstadoAndFechaDevolucionBefore("Activo",LocalDate.now());
+
+        // Lambda expression para actualizar cada préstamo
+        overdueLoans.forEach(loan -> {
             loan.setEstado("Vencido");
             loanRepository.save(loan);
             log.warn("Préstamo {} marcado como vencido", loan.getId());
-        }
-        log.warn("Préstamo {} marcado como vencido", prestamosVencidos.size());
-        return prestamosVencidos.size();
+        });
+
+        log.info("Se actualizaron {} préstamos vencidos", overdueLoans.size());
+        return overdueLoans.size();
     }
 
     @Transactional
@@ -118,9 +121,8 @@ public class LoanService {
 
         //Validaciones
         validarUsuarioYLibrosVencidos(user, request.getUserId());
-        validarDisponibilidadLibro(request.getBookId());
-        validarPrestamosActivos(request.getUserId());
-        validarPrestamosDuplicados(request.getUserId(), request.getBookId());
+
+        validateRequestDto(request);
 
         actualizarEstadoLibro(book);
 
@@ -133,6 +135,11 @@ public class LoanService {
 
     }
 
+    private void validateRequestDto(LoanRequestDTO request) {
+        validarDisponibilidadLibro(request.getBookId());
+        validarPrestamosActivos(request.getUserId());
+        validarPrestamosDuplicados(request.getUserId(), request.getBookId());
+    }
 
 
 }
