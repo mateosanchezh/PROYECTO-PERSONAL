@@ -30,6 +30,7 @@ public class LoanService {
     private final LoanPolicyConfig loanPolicy;
     private final UserRepository userRepository;
     private final LoanMapper loanMapper;
+    private final EmailService emailService;
 
     //Validar estado del usuario y sus prestamos vencidos
     private void validarUsuarioYLibrosVencidos(User user, Long userId){
@@ -130,6 +131,8 @@ public class LoanService {
         Loan guardarPrestamo = loanRepository.save(loan);
 
         //IMPLEMENTAR NOTIFICACION DE CORREOS
+
+        emailService.enviarCorreoConnfiramcionPrestamo(guardarPrestamo);
 
         return loanMapper.toResponseDTO(guardarPrestamo, "Prestamo realizado con exito. La fecha de entrega es: "+ guardarPrestamo.getFechaDevolucion());
 
